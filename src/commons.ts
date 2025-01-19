@@ -1,22 +1,20 @@
-export type ServerCallback<T> = {
+export type ServerCallbackProps<T> = {
 	status: "ok" | "error";
 	message: string;
-	data: T;
+	eventType?: UpdateRoomEvent;
+	data?: T;
 };
 
 export type GenericMapping = Record<string, unknown>;
 
-export enum RoomStatus {
-	STARTED = "STARTED",
-	STANDBY = "STANDBY",
-}
-
 export type Room = {
 	id: string;
-	status: RoomStatus.STANDBY;
+	roomName: string;
+	votingState: VotingState;
 	pointValues: string[];
 	users: Record<string, User>;
-	createdAt: string;
+	createdOn: string;
+	updatedOn?: string;
 };
 
 export type User = {
@@ -24,6 +22,8 @@ export type User = {
 	name: string;
 	isHost: boolean;
 	data: GenericMapping;
+	avatarSrc: string;
+	createdOn: string;
 };
 
 export type CreateRoomResponseObject = {
@@ -33,11 +33,33 @@ export type CreateRoomResponseObject = {
 export enum PointValuesType {
 	SCRUM = "SCRUM",
 	FIBB = "FIBB",
-	CUSTOM = "CUSTOM",
+	INCREMENTAL = "INCREMENTAL",
+	HALF_INCREMENTAL = "HALF_INCREMENTAL",
 }
 
-export const DefaultPointValues: Record<PointValuesType, number[]> = {
-	[PointValuesType.FIBB]: [0.5, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 100],
-	[PointValuesType.SCRUM]: [],
-	[PointValuesType.CUSTOM]: [],
+export const PointValues: Record<PointValuesType, string[]> = {
+	[PointValuesType.FIBB]: ["0", "1", "2", "3", "5", "8", "13", "21", "34", "55", "89", "100"],
+	[PointValuesType.SCRUM]: ["0", "0.5", "1", "2", "3", "5", "8", "13", "20", "40", "70", "100"],
+	[PointValuesType.INCREMENTAL]: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"],
+	[PointValuesType.HALF_INCREMENTAL]: ["0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5"],
 };
+
+export enum VotingState {
+	INITIAL = "INITIAL", // Initial phase of room.
+	STARTED = "STARTED", // User voting phase.
+	ENDED = "ENDED", // Voting ended, users can see result.
+}
+
+export enum UpdateRoomType {
+	START_VOTING = 'START_VOTING',
+	END_VOTING = 'END_VOTING',
+}
+
+export enum UpdateRoomEvent {
+	VOTING_STARTED = "VOTING_STARTED",
+	VOTING_ENDED = "VOTING_ENDED",
+	USER_VOTED = "USER_VOTED",
+	USER_CREATED_ROOM = "USER_CREATED_ROOM",
+	USER_JOINED_ROOM = "USER_JOINED_ROOM",
+	USER_LEFT_ROOM = "USER_LEFT_ROOM",
+}
