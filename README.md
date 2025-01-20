@@ -4,7 +4,7 @@ https://github.com/user-attachments/assets/90a5bc82-424a-4521-95a0-2f722e8d08d9
 
 # About
 
-SprintPlanner facilitates real-time collaborative planning poker sessions. Users can anonymously select and submit card values, and the moderator can reveal all selections simultaneously, fostering efficient and insightful decision-making.
+SprintPlanner facilitates real-time collaborative planning poker sessions. Users can anonymously select and submit card values, fostering efficient and insightful decision-making.
 
 **Technologies:**
 
@@ -18,11 +18,11 @@ SprintPlanner facilitates real-time collaborative planning poker sessions. Users
 
 1. **Clone the FRONTEND repository:**
    ```bash
-   `git clone https://github.com/keanconsolacion/sprint-planner.git`
+   git clone https://github.com/keanconsolacion/sprint-planner.git
    ```
 2. **Clone the BACKEND repository:**
    ```bash
-   `git clone https://github.com/keanconsolacion/sprint-planner-server.git`
+   git clone https://github.com/keanconsolacion/sprint-planner-server.git
    ```
 3. **Install dependencies:**
    ```bash
@@ -48,7 +48,7 @@ SprintPlanner facilitates real-time collaborative planning poker sessions. Users
 - Create a Room:
   - Enter your username.
   - Choose a room name.
-  - Select the desired point values type (e.g., 1-5 stars, 0-10 points).
+  - Select the desired point values type (e.g., 0-10 points).
 
 - Invite Others:
   - Click the "Copy Invite URL" button to generate a unique link.
